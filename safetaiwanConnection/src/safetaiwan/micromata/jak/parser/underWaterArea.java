@@ -38,12 +38,15 @@ import de.micromata.opengis.kml.v_2_2_0.MultiGeometry;
 import de.micromata.opengis.kml.v_2_2_0.Placemark;
 import de.micromata.opengis.kml.v_2_2_0.Polygon;
 import de.micromata.opengis.kml.v_2_2_0.Style;
-import safetaiwan.micromata.jak.CommonParser.CommonTools;
+import safetaiwan.micromata.jak.Common.CommonTools;
 
 public class underWaterArea {
 	Kml kml = null;
-	String path = "";
-
+	public String path = "";
+	public underWaterArea(String path) {
+		this.path = path;
+		this.kml = Kml.unmarshal(new File(path));
+	}
 	public static void main(String[] args) {
 		// test1
 		// String url =
@@ -58,14 +61,9 @@ public class underWaterArea {
 //		 GeographyChecker.Vertex.vertex("25.015576, 121.542660"),
 //		 GeographyChecker.Vertex.vertex("25.013019, 121.539672"),
 //		 GeographyChecker.Vertex.vertex("25.011400, 121.540943"));
-//		GeographyChecker.Vertex[] v= new GeographyChecker.Vertex[0];
-//		GeographyChecker.Vertex xx= new GeographyChecker.Vertex(1,1);
-//		v[0]=GeographyChecker.Vertex.vertex(12, 12);
-//		GeographyChecker ntust = new GeographyChecker(v);
-//		GeographyChecker.Vertex v= GeographyChecker.Vertex(1.0,1.0);
-//		GeographyChecker.Vertex.vertex(vertex);
-//		 double area = ntust.computeArea();
-//		 System.out.println(area+"km^2");
+//		 System.out.println(ntust.computeArea());
+
+		
 		// test3
 		String s = CommonTools.appLocation();
 		String path = s + "/resources/exampledata/GWREGION.kml";
@@ -78,14 +76,22 @@ public class underWaterArea {
 		 underWaterArea uwa = new underWaterArea(path);
 		 HashMap<String, java.util.List<Coordinate>> r = uwa.getKMLCoordinates("gwregion","澎湖地區", "ID_00001", 0);
 		 java.util.List<Coordinate> c = r.get("0/1/0/out");
-		 System.out.println(c.get(0).getLongitude()+" "+c.get(0).getLatitude()+" "+c.get(0).getAltitude());
-		 
-	}
+		 printGeoArea(c);
+//		 System.out.println(c.get(0).getLongitude()+" "+c.get(0).getLatitude()+" "+c.get(0).getAltitude());
 
-	public underWaterArea(String path) {
-		this.path = path;
-		this.kml = Kml.unmarshal(new File(path));
 	}
+	
+	public static void printGeoArea(java.util.List<Coordinate> c){
+		GeographyChecker.Vertex[] v= new GeographyChecker.Vertex[c.size()];
+		for(int i=0;i<c.size();i++){
+			System.out.println(c.get(i).getLongitude()+" "+c.get(i).getLatitude());
+			v[i] = new GeographyChecker.Vertex(c.get(i).getLongitude(),c.get(i).getLatitude());
+		}
+		GeographyChecker ntust = new GeographyChecker(v);
+		System.out.println(ntust.computeArea());
+	}
+	
+
 
 	public  void createKMLForColorStyle(int placeMarkNum, String colorType) {
 		de.micromata.opengis.kml.v_2_2_0.Document doc = (de.micromata.opengis.kml.v_2_2_0.Document) kml.getFeature().withName("TaiwanUnderWater");
@@ -166,7 +172,7 @@ public class underWaterArea {
 
 	}
 
-	public HashMap<String, String> getKMLFolderNumName() {
+	public HashMap<String, String> getKMLFolderAllNumName() {
 
 		de.micromata.opengis.kml.v_2_2_0.Document document = (de.micromata.opengis.kml.v_2_2_0.Document) kml.getFeature();
 		java.util.List<Feature> folderList = document.getFeature();
@@ -178,7 +184,18 @@ public class underWaterArea {
 		}
 		return resultHMF;
 	}
+	public HashMap<String, String> getKMLFolderOneNumName(int levelNum) {
 
+		de.micromata.opengis.kml.v_2_2_0.Document document = (de.micromata.opengis.kml.v_2_2_0.Document) kml.getFeature();
+		java.util.List<Feature> folderList = document.getFeature();
+		HashMap<String, String> resultHMF = new HashMap<String, String>();
+		// String[] result = new String[folderList.size()];
+		
+			// System.out.println(folderList.get(i).getName());
+			resultHMF.put(String.valueOf(levelNum), new String(folderList.get(levelNum).getName()));
+	
+		return resultHMF;
+	}
 	public HashMap<String, String> getKMLPlaceMarkNumName(String folderName) {
 
 		de.micromata.opengis.kml.v_2_2_0.Document document = (de.micromata.opengis.kml.v_2_2_0.Document) kml.getFeature();

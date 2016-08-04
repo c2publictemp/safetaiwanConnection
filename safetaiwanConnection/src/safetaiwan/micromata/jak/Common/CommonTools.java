@@ -1,4 +1,4 @@
-package safetaiwan.micromata.jak.CommonParser;
+package safetaiwan.micromata.jak.Common;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

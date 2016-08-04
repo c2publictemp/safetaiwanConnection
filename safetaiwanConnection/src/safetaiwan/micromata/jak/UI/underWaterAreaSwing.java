@@ -27,7 +27,9 @@ import javax.swing.JLabel;
 public class underWaterAreaSwing extends JFrame {
 
 	private JPanel contentPane;
-
+	String resourceKmlPath = "/resources/exampledata/GWREGION.kml";
+	String KMLpath = appLocation() + resourceKmlPath;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -67,16 +69,15 @@ public class underWaterAreaSwing extends JFrame {
 		gbc_label.gridx = 0;
 		gbc_label.gridy = 1;
 		contentPane.add(label, gbc_label);
-		String[] jboxInput = null;
-		String localPath = appLocation();
-		String KMLpath = localPath + "/resources/exampledata/GWREGION.kml";
+		
+
 		
 		underWaterArea uWaterArea = new underWaterArea(KMLpath);
-		
-		HashMap<String,String> HM =uWaterArea.getKMLPlaceMarkNumName( uWaterArea.getKMLFolderNumName().get(0));
-		jboxInput = new String[HM.size()];
+		System.out.println(uWaterArea.path);
+		HashMap<String,String> HM =uWaterArea.getKMLPlaceMarkNumName( uWaterArea.getKMLFolderAllNumName().get("0"));
+		String[] jboxInput = new String[HM.size()];
 		for(int i = 0 ; i < HM.size();i++){
-			jboxInput[i]=HM.get(i);
+			jboxInput[i]=HM.get(String.valueOf(i));
 		}
 		JComboBox comboBox = new JComboBox(jboxInput);
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
