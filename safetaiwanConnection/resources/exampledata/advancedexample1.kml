@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:kml xmlns:gx="http://www.google.com/kml/ext/2.2" xmlns:ns2="http://www.opengis.net/kml/2.2" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:xal="urn:oasis:names:tc:ciq:xsdschema:xAL:2.0">
+    <ns2:Document>
+        <ns2:name>JAK Example1</ns2:name>
+        <ns2:open>1</ns2:open>
+        <ns2:Style id="style_Asia">
+            <ns2:IconStyle>
+                <ns2:scale>5.0</ns2:scale>
+                <ns2:heading>0.0</ns2:heading>
+                <ns2:Icon>
+                    <ns2:href>http://chart.apis.google.com/chart?chs=380x200&amp;chd=t:30,70&amp;cht=p&amp;chf=bg,s,ffffff00</ns2:href>
+                    <ns2:refreshInterval>0.0</ns2:refreshInterval>
+                    <ns2:viewRefreshTime>0.0</ns2:viewRefreshTime>
+                    <ns2:viewBoundScale>0.0</ns2:viewBoundScale>
+                </ns2:Icon>
+            </ns2:IconStyle>
+            <ns2:LabelStyle>
+                <ns2:color>ff43b3ff</ns2:color>
+                <ns2:scale>5.0</ns2:scale>
+            </ns2:LabelStyle>
+        </ns2:Style>
+        <ns2:Style id="style_Africa">
+            <ns2:IconStyle>
+                <ns2:scale>5.0</ns2:scale>
+                <ns2:heading>0.0</ns2:heading>
+                <ns2:Icon>
+                    <ns2:href>http://chart.apis.google.com/chart?chs=380x200&amp;chd=t:20,80&amp;cht=p&amp;chf=bg,s,ffffff00</ns2:href>
+                    <ns2:refreshInterval>0.0</ns2:refreshInterval>
+                    <ns2:viewRefreshTime>0.0</ns2:viewRefreshTime>
+                    <ns2:viewBoundScale>0.0</ns2:viewBoundScale>
+                </ns2:Icon>
+            </ns2:IconStyle>
+            <ns2:LabelStyle>
+                <ns2:color>ff43b3ff</ns2:color>
+                <ns2:scale>5.0</ns2:scale>
+            </ns2:LabelStyle>
+        </ns2:Style>
+        <ns2:Folder>
+            <ns2:name>Continents with Earth's surface</ns2:name>
+            <ns2:open>1</ns2:open>
+            <ns2:Placemark>
+                <ns2:name>Asia</ns2:name>
+                <ns2:description>&lt;![CDATA[&lt;img src=&quot;http://chart.apis.google.com/chart?chs=430x200&amp;chd=t:30,70&amp;cht=p3&amp;chl=Asia|remaining&amp;chtt=Earth's surface&quot; /&gt;</ns2:description>
+                <ns2:LookAt>
+                    <ns2:longitude>93.24607775062842</ns2:longitude>
+                    <ns2:latitude>47.49808862281773</ns2:latitude>
+                    <ns2:altitude>0.0</ns2:altitude>
+                    <ns2:heading>0.0</ns2:heading>
+                    <ns2:tilt>0.0</ns2:tilt>
+                    <ns2:range>1.0</ns2:range>
+                </ns2:LookAt>
+                <ns2:styleUrl>#style_Asia</ns2:styleUrl>
+                <ns2:Point>
+                    <ns2:coordinates>93.24607775062842,47.49808862281773</ns2:coordinates>
+                </ns2:Point>
+            </ns2:Placemark>
+            <ns2:Placemark>
+                <ns2:name>Africa</ns2:name>
+                <ns2:description>&lt;![CDATA[&lt;img src=&quot;http://chart.apis.google.com/chart?chs=430x200&amp;chd=t:20,80&amp;cht=p3&amp;chl=Africa|remaining&amp;chtt=Earth's surface&quot; /&gt;</ns2:description>
+                <ns2:LookAt>
+                    <ns2:longitude>19.44601806124206</ns2:longitude>
+                    <ns2:latitude>10.13133611111111</ns2:latitude>
+                    <ns2:altitude>0.0</ns2:altitude>
+                    <ns2:heading>0.0</ns2:heading>
+                    <ns2:tilt>0.0</ns2:tilt>
+                    <ns2:range>1.0</ns2:range>
+                </ns2:LookAt>
+                <ns2:styleUrl>#style_Africa</ns2:styleUrl>
+                <ns2:Point>
+                    <ns2:coordinates>19.44601806124206,10.13133611111111</ns2:coordinates>
+                </ns2:Point>
+            </ns2:Placemark>
+        </ns2:Folder>
+    </ns2:Document>
+</ns2:kml>
