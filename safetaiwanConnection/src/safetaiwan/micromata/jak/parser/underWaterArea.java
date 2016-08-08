@@ -2,14 +2,17 @@ package safetaiwan.micromata.jak.parser;
 
 import java.awt.List;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -18,7 +21,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.magiclen.magiclocationchecker.GeographyChecker;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Comment;
-import org.w3c.dom.Document;
+//import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
@@ -29,7 +32,9 @@ import org.w3c.dom.ls.LSSerializer;
 import org.xml.sax.SAXException;
 
 import de.micromata.opengis.kml.v_2_2_0.Boundary;
+import de.micromata.opengis.kml.v_2_2_0.ColorMode;
 import de.micromata.opengis.kml.v_2_2_0.Coordinate;
+import de.micromata.opengis.kml.v_2_2_0.Document;
 import de.micromata.opengis.kml.v_2_2_0.Feature;
 import de.micromata.opengis.kml.v_2_2_0.Folder;
 import de.micromata.opengis.kml.v_2_2_0.Kml;
@@ -38,6 +43,7 @@ import de.micromata.opengis.kml.v_2_2_0.MultiGeometry;
 import de.micromata.opengis.kml.v_2_2_0.Placemark;
 import de.micromata.opengis.kml.v_2_2_0.Polygon;
 import de.micromata.opengis.kml.v_2_2_0.Style;
+import de.micromata.opengis.kml.v_2_2_0.StyleSelector;
 import safetaiwan.micromata.jak.Common.CommonTools;
 
 public class underWaterArea {
@@ -47,53 +53,46 @@ public class underWaterArea {
 		this.path = path;
 		this.kml = Kml.unmarshal(new File(path));
 	}
-	public static void main(String[] args) {
+	public static void main(String[] args) throws FileNotFoundException {
 		// test1
 		// String url =
 		// "http://gic.wra.gov.tw/gic/API/Google/DownLoad.aspx?fname=GWREGION";
 		// internetGetKmlFile(url);
-		// test2
-//		 GeographyChecker ntust = new GeographyChecker(false,
-//		 GeographyChecker.Vertex.vertex("25.011390, 121.541024"),
-//		 GeographyChecker.Vertex.vertex("25.012858, 121.543207"),
-//		 GeographyChecker.Vertex.vertex("25.011823, 121.544151"),
-//		 GeographyChecker.Vertex.vertex("25.012542, 121.545020"),
-//		 GeographyChecker.Vertex.vertex("25.015576, 121.542660"),
-//		 GeographyChecker.Vertex.vertex("25.013019, 121.539672"),
-//		 GeographyChecker.Vertex.vertex("25.011400, 121.540943"));
-//		 System.out.println(ntust.computeArea());
 
-		
+
 		// test3
 		String s = CommonTools.appLocation();
 		String path = s + "/resources/exampledata/GWREGION.kml";
 		String path2 = s + "/resources/exampledata/worldBorders.kml";
+		// String path ="src/main/resources/exampledata/worldBorders.kml";
 		// System.out.println(getKMLFolderName(path1)[0]);
 		// System.out.println(getKMLFolderName(path2)[0]);
 		// sysPrint1D(getKMLPlaceMarkName(path1, "gwregion"));
 		// System.out.println();
-		// System.out.println(getKMLPlaceMarkDescription(path1, "gwregion","澎湖地區", "ID_00001"));
-		 underWaterArea uwa = new underWaterArea(path);
-		 HashMap<String, java.util.List<Coordinate>> r = uwa.getKMLCoordinates("gwregion","澎湖地區", "ID_00001", 0);
-		 java.util.List<Coordinate> c = r.get("0/1/0/out");
-		 printGeoArea(c);
-//		 System.out.println(c.get(0).getLongitude()+" "+c.get(0).getLatitude()+" "+c.get(0).getAltitude());
-
+		underWaterArea uwa = new underWaterArea(path);
+		 System.out.println(uwa.getKMLPlaceMarkDescription( "gwregion","澎湖地區", "ID_00001"));
+		// underWaterArea uwa = new underWaterArea(path);
+		// HashMap<String, java.util.List<Coordinate>> r = uwa.getKMLCoordinates("gwregion", "澎湖地區", "ID_00001", 0);
+		// java.util.List<Coordinate> c = r.get("0/1/0/out");
+		// printGeoArea(c);
+		// System.out.println(c.get(0).getLongitude()+" "+c.get(0).getLatitude()+" "+c.get(0).getAltitude());
+		
+		uwa.createKMLForColorStyle(0, "red");
 	}
-	
-	public static void printGeoArea(java.util.List<Coordinate> c){
-		GeographyChecker.Vertex[] v= new GeographyChecker.Vertex[c.size()];
-		for(int i=0;i<c.size();i++){
-			System.out.println(c.get(i).getLongitude()+" "+c.get(i).getLatitude());
-			v[i] = new GeographyChecker.Vertex(c.get(i).getLongitude(),c.get(i).getLatitude());
+
+	public static double printGeoArea(java.util.List<Coordinate> c) {
+		GeographyChecker.Vertex[] v = new GeographyChecker.Vertex[c.size()];
+		for (int i = 0; i < c.size(); i++) {
+			System.out.println(c.get(i).getLongitude() + " " + c.get(i).getLatitude());
+			v[i] = new GeographyChecker.Vertex(c.get(i).getLongitude(), c.get(i).getLatitude());
 		}
 		GeographyChecker ntust = new GeographyChecker(v);
 		System.out.println(ntust.computeArea());
+		return ntust.computeArea();
 	}
-	
 
-
-	public  void createKMLForColorStyle(int placeMarkNum, String colorType) {
+	public void createKMLForColorStyle(int placeMarkNum, String colorType) {
+//		Kml worldBorders = Kml.unmarshal(new File(CommonTools.appLocation() + "/resources/exampledata/GWREGION.kml"));
 		de.micromata.opengis.kml.v_2_2_0.Document doc = (de.micromata.opengis.kml.v_2_2_0.Document) kml.getFeature().withName("TaiwanUnderWater");
 
 		// Folder rootFolder =
@@ -103,17 +102,41 @@ public class underWaterArea {
 		Style redPolygonStyle = doc.createAndAddStyle().withId("redPolygon");
 		Style yellowPolygonStyle = doc.createAndAddStyle().withId("yellowPolygon");
 		Style greenPolygonStyle = doc.createAndAddStyle().withId("greenPolygon");
+		Style defaultPolygonStyle = doc.createAndAddStyle().withId("defaultPolygon");
 		radioStyle.createAndSetListStyle().withListItemType(ListItemType.RADIO_FOLDER);
-		redPolygonStyle.createAndSetPolyStyle().withColor("FFFF0000");
-		yellowPolygonStyle.createAndSetPolyStyle().withColor("FFFFFF00");
-		greenPolygonStyle.createAndSetPolyStyle().withColor("FF008000");
+		redPolygonStyle.createAndSetPolyStyle().withColor("800000FF");
+		yellowPolygonStyle.createAndSetPolyStyle().withColor("8000FFFF");
+		greenPolygonStyle.createAndSetPolyStyle().withColor("80008000");
+		defaultPolygonStyle.createAndSetPolyStyle().withColor("80FF0000");
 		// put the original folder into the rootFolder and use for 3D shapes
 		Folder rootFolder = (Folder) doc.getFeature().get(0).withName("Taiwan");
-		Placemark pmList = (Placemark) rootFolder.getFeature();
+		java.util.List<Feature> pmList = rootFolder.getFeature();
+		HashMap<Integer, Double> pmArea = new HashMap<Integer, Double>();
+		for (int i = 0; i < pmList.size(); i++) {
+			HashMap<String, java.util.List<Coordinate>> cTmp = getKMLCoordinates(0, i, 0);
+			// pmArea.put(i, printGeoArea(cTmp.get("0" + "/" + String.valueOf(i) + "/" + "0" + "out")));
 
-		doc.getFeature().remove(0);
-		doc.addToFeature(rootFolder);
-		// rootFolder.addToFeature(oldFolderTMP);
+		}
+		Placemark pm = (Placemark) pmList.get(placeMarkNum);
+
+		if (colorType.equals("red")) {
+			pm.withStyleUrl("#redPolygon");
+		} else if (colorType.equals("yellow")) {
+			pm.withStyleUrl("#yellowPolygon");
+		} else if (colorType.equals("green")) {
+			pm.withStyleUrl("#greenPolygon");
+		} else {
+			pm.withStyleUrl("#defaultPolygon");
+		}
+
+		try {
+			StringWriter sw = new StringWriter();
+			kml.marshal(new File("writebyuser.kml"));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	// key foldernum+/+placeMarknum+/+polygonNum value+/+out
@@ -172,6 +195,46 @@ public class underWaterArea {
 
 	}
 
+	public HashMap<String, java.util.List<Coordinate>> getKMLCoordinates(int folderLevel, int placeMarkLevel, int polygonNum) {
+
+		de.micromata.opengis.kml.v_2_2_0.Document document = (de.micromata.opengis.kml.v_2_2_0.Document) kml.getFeature();
+		java.util.List<Feature> folderList = document.getFeature();
+		HashMap<String, java.util.List<Coordinate>> result = new HashMap<String, java.util.List<Coordinate>>();
+		Folder tmpFolder = new Folder();
+		tmpFolder = (Folder) folderList.get(folderLevel);
+		java.util.List<Feature> pmlist = tmpFolder.getFeature();
+		Placemark tmpplaceMark = new Placemark();
+		tmpplaceMark = (Placemark) pmlist.get(placeMarkLevel);
+		// MultiGeometry multiGeometry = new MultiGeometry();
+		MultiGeometry mg = ((MultiGeometry) tmpplaceMark.getGeometry());
+		// for (int k = 0; k < mg.getGeometry().size(); k++)// polygon
+		Polygon p = (Polygon) mg.getGeometry().get(polygonNum);
+		Polygon polygon = new Polygon();
+		polygon.withAltitudeMode(p.getAltitudeMode()).withExtrude(p.isExtrude());
+		// java.util.List<Coordinate> coordinates = outerBoundaryIs.createAndSetLinearRing().createAndSetCoordinates();
+		java.util.List<Coordinate> coordinates = new java.util.ArrayList<Coordinate>();
+		for (int l = 0; l < p.getOuterBoundaryIs().getLinearRing().getCoordinates().size(); l++) {
+			Coordinate c = p.getOuterBoundaryIs().getLinearRing().getCoordinates().get(l);
+			coordinates.add(l, new Coordinate(c.getLongitude(), c.getLatitude(), c.getAltitude()));
+		}
+		String resultkey = folderLevel + "/" + placeMarkLevel + "/" + polygonNum + "/out";
+		result.put(resultkey, coordinates);
+
+		if (!p.getInnerBoundaryIs().isEmpty()) {
+			for (int m = 0; m < p.getInnerBoundaryIs().size(); m++) {// inner可以很多個
+				// java.util.List<Coordinate> coordinatesInner = innerBoundary.createAndSetLinearRing().createAndSetCoordinates();
+				for (int n = 0; n < p.getInnerBoundaryIs().get(m).getLinearRing().getCoordinates().size(); n++) {
+					Coordinate c = p.getInnerBoundaryIs().get(m).getLinearRing().getCoordinates().get(n);
+					coordinates.add(n, new Coordinate(c.getLongitude(), c.getLatitude(), c.getAltitude()));
+				}
+				String resultkeyIn = folderLevel + "/" + placeMarkLevel + "/" + polygonNum + "/" + m + "/in";
+				result.put(resultkeyIn, coordinates);
+			}
+		}
+		return result;
+
+	}
+
 	public HashMap<String, String> getKMLFolderAllNumName() {
 
 		de.micromata.opengis.kml.v_2_2_0.Document document = (de.micromata.opengis.kml.v_2_2_0.Document) kml.getFeature();
@@ -190,10 +253,10 @@ public class underWaterArea {
 		java.util.List<Feature> folderList = document.getFeature();
 		HashMap<String, String> resultHMF = new HashMap<String, String>();
 		// String[] result = new String[folderList.size()];
-		
-			// System.out.println(folderList.get(i).getName());
-			resultHMF.put(String.valueOf(levelNum), new String(folderList.get(levelNum).getName()));
-	
+
+		// System.out.println(folderList.get(i).getName());
+		resultHMF.put(String.valueOf(levelNum), new String(folderList.get(levelNum).getName()));
+
 		return resultHMF;
 	}
 	public HashMap<String, String> getKMLPlaceMarkNumName(String folderName) {

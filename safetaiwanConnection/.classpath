@@ -2,10 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
-	<classpathentry kind="lib" path="D:/Tools/JavaAPIforKml-2.2.1.jar" sourcepath="/javaapiforkml"/>
+	<classpathentry kind="lib" path="D:/WorkSpaceAll/PercyWorkSpace/safetaiwanConnection2/safetaiwanConnection/JavaAPIforKml.jar" sourcepath="/javaapiforkml"/>
 	<classpathentry kind="lib" path="D:/Tools/jsoup-1.9.2.jar"/>
 	<classpathentry kind="lib" path="D:/Tools/MagicLocationChecker-2.1.1.jar" sourcepath="/MagicLocationChecker-2.1.1"/>
 	<classpathentry kind="lib" path="D:/Tools/commons-net-3.5-sources.jar"/>
 	<classpathentry kind="lib" path="D:/Tools/commons-net-3.5.jar"/>
+	<classpathentry kind="lib" path="D:/WorkSpaceAll/PercyWorkSpace/safetaiwanConnection2/safetaiwanConnection/jaxb-impl-2.2.jar"/>
+	<classpathentry kind="lib" path="D:/WorkSpaceAll/PercyWorkSpace/safetaiwanConnection2/safetaiwanConnection/jaxb-xjc-2.2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
