@@ -29,11 +29,18 @@ public class KMLReceiveFromNet {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		KMLReceive();
+		String s = CommonTools.appLocation();
+		String URL = "http://gic.wra.gov.tw/gic/API/Google/DownLoad.aspx?fname=GWREGION";
+		String outFilePath = s + "/resources/exampledata/underwater.kml";
+		KMLReceive(URL,outFilePath);
 	}
-	public static void KMLReceive() {
+	public static void KMLReceive(String url,String outFilePath) {
+		
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		String url = "http://gic.wra.gov.tw/gic/API/Google/DownLoad.aspx?fname=GWREGION";
+		if(url.equals("") || url==null){
+			url = "http://gic.wra.gov.tw/gic/API/Google/DownLoad.aspx?fname=GWREGION";
+		}
+		
 		DocumentBuilder db;
 		Document doc;
 		String a = null;
@@ -44,9 +51,11 @@ public class KMLReceiveFromNet {
 			a = XMLParserTools.formatXML(url);
 			System.out.println(a);
 			List<String> lines = Arrays.asList(a);
-			String s = CommonTools.appLocation();
-			String path = s + "/resources/exampledata/the-file-name.kml";
-			Path file = Paths.get(path);
+			if(outFilePath.equals("") || outFilePath==null){
+				String s = CommonTools.appLocation();
+				outFilePath = s + "/resources/exampledata/underwater.kml";
+			}
+			Path file = Paths.get(outFilePath);
 			Files.write(file, lines, Charset.forName("UTF-8"));
 		} catch (ParserConfigurationException | SAXException | IOException e) {
 			// TODO Auto-generated catch block

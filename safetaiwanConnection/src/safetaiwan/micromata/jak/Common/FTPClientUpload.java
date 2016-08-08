@@ -47,10 +47,9 @@ public class FTPClientUpload {
 			// String filename = filePath;
 			fis = new FileInputStream(filePath);
 
-			//
-			// Store file to server
-			//
+			//delete file in ftp
 			// client.deleteFile(filename);
+			// Store file to server
 			Store = client.storeFile(filename, fis);
 			fis.close();
 			client.logout();
