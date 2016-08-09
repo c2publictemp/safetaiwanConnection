@@ -70,20 +70,22 @@ public class underWaterArea {
 		// sysPrint1D(getKMLPlaceMarkName(path1, "gwregion"));
 		// System.out.println();
 		underWaterArea uwa = new underWaterArea(path);
-		 System.out.println(uwa.getKMLPlaceMarkDescription( "gwregion","澎湖地區", "ID_00001"));
+//		 System.out.println(uwa.getKMLPlaceMarkDescription( "gwregion","澎湖地區", "ID_00001"));
 		// underWaterArea uwa = new underWaterArea(path);
-		// HashMap<String, java.util.List<Coordinate>> r = uwa.getKMLCoordinates("gwregion", "澎湖地區", "ID_00001", 0);
-		// java.util.List<Coordinate> c = r.get("0/1/0/out");
-		// printGeoArea(c);
+		 HashMap<String, java.util.List<Coordinate>> r = uwa.getKMLCoordinates("gwregion", "澎湖地區", "ID_00001", 0);
+		 java.util.List<Coordinate> c = r.get("0/1/0/out");
+		 r = uwa.getKMLCoordinates(0,1,0);
+		 c = r.get("0/1/0/out");
+		 printGeoArea(c);
 		// System.out.println(c.get(0).getLongitude()+" "+c.get(0).getLatitude()+" "+c.get(0).getAltitude());
 		
-		uwa.createKMLForColorStyle(0, "red");
+//		uwa.createKMLForColorStyle(0, "red");
 	}
 
 	public static double printGeoArea(java.util.List<Coordinate> c) {
 		GeographyChecker.Vertex[] v = new GeographyChecker.Vertex[c.size()];
 		for (int i = 0; i < c.size(); i++) {
-			System.out.println(c.get(i).getLongitude() + " " + c.get(i).getLatitude());
+//			System.out.println(c.get(i).getLongitude() + " " + c.get(i).getLatitude());
 			v[i] = new GeographyChecker.Vertex(c.get(i).getLongitude(), c.get(i).getLatitude());
 		}
 		GeographyChecker ntust = new GeographyChecker(v);
@@ -91,7 +93,7 @@ public class underWaterArea {
 		return ntust.computeArea();
 	}
 
-	public void createKMLForColorStyle(int placeMarkNum, String colorType) {
+	public void createKMLForColorStyle(int placeMarkNum, String colorType,double overArea) {
 //		Kml worldBorders = Kml.unmarshal(new File(CommonTools.appLocation() + "/resources/exampledata/GWREGION.kml"));
 		de.micromata.opengis.kml.v_2_2_0.Document doc = (de.micromata.opengis.kml.v_2_2_0.Document) kml.getFeature().withName("TaiwanUnderWater");
 
@@ -205,19 +207,23 @@ public class underWaterArea {
 		java.util.List<Feature> pmlist = tmpFolder.getFeature();
 		Placemark tmpplaceMark = new Placemark();
 		tmpplaceMark = (Placemark) pmlist.get(placeMarkLevel);
+		System.out.println(tmpplaceMark.getName());
 		// MultiGeometry multiGeometry = new MultiGeometry();
 		MultiGeometry mg = ((MultiGeometry) tmpplaceMark.getGeometry());
 		// for (int k = 0; k < mg.getGeometry().size(); k++)// polygon
 		Polygon p = (Polygon) mg.getGeometry().get(polygonNum);
+		
 		Polygon polygon = new Polygon();
 		polygon.withAltitudeMode(p.getAltitudeMode()).withExtrude(p.isExtrude());
 		// java.util.List<Coordinate> coordinates = outerBoundaryIs.createAndSetLinearRing().createAndSetCoordinates();
 		java.util.List<Coordinate> coordinates = new java.util.ArrayList<Coordinate>();
 		for (int l = 0; l < p.getOuterBoundaryIs().getLinearRing().getCoordinates().size(); l++) {
 			Coordinate c = p.getOuterBoundaryIs().getLinearRing().getCoordinates().get(l);
+			
 			coordinates.add(l, new Coordinate(c.getLongitude(), c.getLatitude(), c.getAltitude()));
 		}
 		String resultkey = folderLevel + "/" + placeMarkLevel + "/" + polygonNum + "/out";
+		
 		result.put(resultkey, coordinates);
 
 		if (!p.getInnerBoundaryIs().isEmpty()) {
