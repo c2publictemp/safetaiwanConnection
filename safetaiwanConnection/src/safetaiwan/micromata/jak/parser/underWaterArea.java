@@ -139,16 +139,16 @@ public class underWaterArea {
 		Style radioStyle = doc.createAndAddStyle().withId("radioFolder");
 		Style redPolygonStyle = doc.createAndAddStyle().withId("redPolygon");
 		Style yellowPolygonStyle = doc.createAndAddStyle().withId("yellowPolygon");
-		Style greenPolygonStyle = doc.createAndAddStyle().withId("greenPolygon");
+		Style bluePolygonStyle = doc.createAndAddStyle().withId("bluePolygon");
 		Style defaultPolygonStyle = doc.createAndAddStyle().withId("defaultPolygon");
 		radioStyle.createAndSetListStyle().withListItemType(ListItemType.RADIO_FOLDER);
 		redPolygonStyle.createAndSetPolyStyle().withColor("800000FF");
 		redPolygonStyle.createAndSetLineStyle().withWidth(lineWidth);
 		yellowPolygonStyle.createAndSetPolyStyle().withColor("8000FFFF");
 		yellowPolygonStyle.createAndSetLineStyle().withWidth(lineWidth);
-		greenPolygonStyle.createAndSetPolyStyle().withColor("80008000");
-		greenPolygonStyle.createAndSetLineStyle().withWidth(lineWidth);
-		defaultPolygonStyle.createAndSetPolyStyle().withColor("80FF0000");
+		bluePolygonStyle.createAndSetPolyStyle().withColor("80FF0000");
+		bluePolygonStyle.createAndSetLineStyle().withWidth(lineWidth);
+		defaultPolygonStyle.createAndSetPolyStyle().withColor("80008000");
 		defaultPolygonStyle.createAndSetLineStyle().withWidth(lineWidth);
 		// put the original folder into the rootFolder and use for 3D shapes
 		Folder rootFolder = (Folder) doc.getFeature().get(0).withName("Taiwan");
@@ -170,8 +170,8 @@ public class underWaterArea {
 				pm.withStyleUrl("#redPolygon");
 			} else if (colorType.equals("yellow") && geoArea >= overArea) {
 				pm.withStyleUrl("#yellowPolygon");
-			} else if (colorType.equals("green") && geoArea >= overArea) {
-				pm.withStyleUrl("#greenPolygon");
+			} else if (colorType.equals("blue") && geoArea >= overArea) {
+				pm.withStyleUrl("#bluePolygon");
 			} else {
 				pm.withStyleUrl("#defaultPolygon");
 			}

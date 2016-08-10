@@ -39,12 +39,12 @@
                 <ns2:color>8000FFFF</ns2:color>
             </ns2:PolyStyle>
         </ns2:Style>
-        <ns2:Style id="greenPolygon">
+        <ns2:Style id="bluePolygon">
             <ns2:LineStyle>
                 <ns2:width>2.0</ns2:width>
             </ns2:LineStyle>
             <ns2:PolyStyle>
-                <ns2:color>80008000</ns2:color>
+                <ns2:color>80FF0000</ns2:color>
             </ns2:PolyStyle>
         </ns2:Style>
         <ns2:Style id="defaultPolygon">
@@ -52,7 +52,7 @@
                 <ns2:width>2.0</ns2:width>
             </ns2:LineStyle>
             <ns2:PolyStyle>
-                <ns2:color>80FF0000</ns2:color>
+                <ns2:color>80008000</ns2:color>
             </ns2:PolyStyle>
         </ns2:Style>
         <ns2:Folder id="FeatureLayer0">
@@ -156,7 +156,7 @@
 &lt;/html&gt;
 
 </ns2:description>
-                <ns2:styleUrl>#redPolygon</ns2:styleUrl>
+                <ns2:styleUrl>#defaultPolygon</ns2:styleUrl>
                 <ns2:MultiGeometry>
                     <ns2:Polygon>
                         <ns2:extrude>0</ns2:extrude>
@@ -266,7 +266,7 @@
 &lt;/html&gt;
 
 </ns2:description>
-                <ns2:styleUrl>#redPolygon</ns2:styleUrl>
+                <ns2:styleUrl>#defaultPolygon</ns2:styleUrl>
                 <ns2:MultiGeometry>
                     <ns2:Polygon>
                         <ns2:extrude>0</ns2:extrude>
@@ -376,7 +376,7 @@
 &lt;/html&gt;
 
 </ns2:description>
-                <ns2:styleUrl>#redPolygon</ns2:styleUrl>
+                <ns2:styleUrl>#defaultPolygon</ns2:styleUrl>
                 <ns2:MultiGeometry>
                     <ns2:Polygon>
                         <ns2:extrude>0</ns2:extrude>
@@ -486,7 +486,7 @@
 &lt;/html&gt;
 
 </ns2:description>
-                <ns2:styleUrl>#redPolygon</ns2:styleUrl>
+                <ns2:styleUrl>#defaultPolygon</ns2:styleUrl>
                 <ns2:MultiGeometry>
                     <ns2:Polygon>
                         <ns2:extrude>0</ns2:extrude>
@@ -596,7 +596,7 @@
 &lt;/html&gt;
 
 </ns2:description>
-                <ns2:styleUrl>#redPolygon</ns2:styleUrl>
+                <ns2:styleUrl>#defaultPolygon</ns2:styleUrl>
                 <ns2:MultiGeometry>
                     <ns2:Polygon>
                         <ns2:extrude>0</ns2:extrude>
@@ -706,7 +706,7 @@
 &lt;/html&gt;
 
 </ns2:description>
-                <ns2:styleUrl>#redPolygon</ns2:styleUrl>
+                <ns2:styleUrl>#defaultPolygon</ns2:styleUrl>
                 <ns2:MultiGeometry>
                     <ns2:Polygon>
                         <ns2:extrude>0</ns2:extrude>
@@ -816,7 +816,7 @@
 &lt;/html&gt;
 
 </ns2:description>
-                <ns2:styleUrl>#redPolygon</ns2:styleUrl>
+                <ns2:styleUrl>#bluePolygon</ns2:styleUrl>
                 <ns2:MultiGeometry>
                     <ns2:Polygon>
                         <ns2:extrude>0</ns2:extrude>
@@ -926,7 +926,7 @@
 &lt;/html&gt;
 
 </ns2:description>
-                <ns2:styleUrl>#redPolygon</ns2:styleUrl>
+                <ns2:styleUrl>#defaultPolygon</ns2:styleUrl>
                 <ns2:MultiGeometry>
                     <ns2:Polygon>
                         <ns2:extrude>0</ns2:extrude>
@@ -1036,7 +1036,7 @@
 &lt;/html&gt;
 
 </ns2:description>
-                <ns2:styleUrl>#redPolygon</ns2:styleUrl>
+                <ns2:styleUrl>#defaultPolygon</ns2:styleUrl>
                 <ns2:MultiGeometry>
                     <ns2:Polygon>
                         <ns2:extrude>0</ns2:extrude>
@@ -1146,7 +1146,7 @@
 &lt;/html&gt;
 
 </ns2:description>
-                <ns2:styleUrl>#redPolygon</ns2:styleUrl>
+                <ns2:styleUrl>#defaultPolygon</ns2:styleUrl>
                 <ns2:MultiGeometry>
                     <ns2:Polygon>
                         <ns2:extrude>0</ns2:extrude>
@@ -1256,7 +1256,7 @@
 &lt;/html&gt;
 
 </ns2:description>
-                <ns2:styleUrl>#redPolygon</ns2:styleUrl>
+                <ns2:styleUrl>#bluePolygon</ns2:styleUrl>
                 <ns2:MultiGeometry>
                     <ns2:Polygon>
                         <ns2:extrude>0</ns2:extrude>
@@ -1366,7 +1366,7 @@
 &lt;/html&gt;
 
 </ns2:description>
-                <ns2:styleUrl>#redPolygon</ns2:styleUrl>
+                <ns2:styleUrl>#bluePolygon</ns2:styleUrl>
                 <ns2:MultiGeometry>
                     <ns2:Polygon>
                         <ns2:extrude>0</ns2:extrude>
@@ -1476,7 +1476,7 @@
 &lt;/html&gt;
 
 </ns2:description>
-                <ns2:styleUrl>#redPolygon</ns2:styleUrl>
+                <ns2:styleUrl>#bluePolygon</ns2:styleUrl>
                 <ns2:MultiGeometry>
                     <ns2:Polygon>
                         <ns2:extrude>0</ns2:extrude>
@@ -1586,7 +1586,7 @@
 &lt;/html&gt;
 
 </ns2:description>
-                <ns2:styleUrl>#redPolygon</ns2:styleUrl>
+                <ns2:styleUrl>#bluePolygon</ns2:styleUrl>
                 <ns2:MultiGeometry>
                     <ns2:Polygon>
                         <ns2:extrude>0</ns2:extrude>

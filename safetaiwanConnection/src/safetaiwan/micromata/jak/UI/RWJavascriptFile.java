@@ -67,8 +67,8 @@ public class RWJavascriptFile {
 		HashMap colorDecoder = new HashMap();
 		colorDecoder.put("red", "'#FF0000'");
 		colorDecoder.put("yellow", "'#FFFF00'");
-		colorDecoder.put("green", "'#ADFF2F'");
-		colorDecoder.put("default","'#0000FF'");
+		colorDecoder.put("blue", "'#0000FF'");
+		colorDecoder.put("default","'#008000'");//008000 ADFF2F
 		String strokeColor = "'#FF0000'";
 		String fillColor = "'#FF0000'";
 		for (int i = 0; i < uWA.placeMarkTotalNum(0); i++) {

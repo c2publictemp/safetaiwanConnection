@@ -157,7 +157,7 @@ public class underWaterAreaController extends AnchorPane {
 
 	private void comboBoxOverAreaColorSelect() {
 		OverAreaComboBoxColor.setPromptText("選擇顏色設置");
-		String[] colorArray = {"red", "yellow", "green"};
+		String[] colorArray = {"red", "yellow", "blue"};
 		ObservableList<String> data = FXCollections.observableArrayList(colorArray);
 
 		OverAreaComboBoxColor.setItems(data);
@@ -185,8 +185,8 @@ public class underWaterAreaController extends AnchorPane {
 								setTextFill(Color.RED);
 							} else if (item.contains("yellow")) {
 								setTextFill(Color.GOLD);
-							} else if (item.contains("green")) {
-								setTextFill(Color.GREEN);
+							} else if (item.contains("blue")) {
+								setTextFill(Color.BLUE);
 							}
 
 						} else {
