@@ -64,7 +64,7 @@ public class KMLReceiveFromNet {
 		// String url = "http://opendata.cwb.gov.tw/opendataapi?dataid=F-C0032-001&authorizationkey=CWB-A56720DC-7A3B-4DF6-970A-326C62193C78";
 
 		// KML kml =
-		System.out.println(a);
+//		System.out.println(a);
 	}
 	
 }

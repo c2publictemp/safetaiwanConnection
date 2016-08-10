@@ -11,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -61,7 +62,7 @@ public class underWaterArea {
 
 		// test3
 		String s = CommonTools.appLocation();
-		String path = s + "/resources/exampledata/GWREGION.kml";
+		String path = s + "/resources/exampledata/underwater.kml";
 		String path2 = s + "/resources/exampledata/worldBorders.kml";
 		// String path ="src/main/resources/exampledata/worldBorders.kml";
 		// System.out.println(getKMLFolderName(path1)[0]);
@@ -71,11 +72,11 @@ public class underWaterArea {
 		underWaterArea uwa = new underWaterArea(path);
 		// System.out.println(uwa.getKMLPlaceMarkDescription( "gwregion","澎湖地區", "ID_00001"));
 		// underWaterArea uwa = new underWaterArea(path);
-		 HashMap<String, java.util.List<Coordinate>> r = uwa.getKMLCoordinates("gwregion", "澎湖地區", "ID_00001", 0);
-		 java.util.List<Coordinate> c = r.get("0/1/0/out");
-		 r = uwa.getKMLCoordinates(0,1,0);
-		 c = r.get("0/1/0/out");
-//		 printGeoArea(c);
+		// HashMap<String, java.util.List<Coordinate>> r = uwa.getKMLCoordinates("gwregion", "澎湖地區", "ID_00001", 0);
+		// java.util.List<Coordinate> c = r.get("0/1/0/out");
+		// r = uwa.getKMLCoordinates(0,1,0);
+		// c = r.get("0/1/0/out");
+		// printGeoArea(c);
 		// System.out.println(c.get(0).getLongitude()+" "+c.get(0).getLatitude()+" "+c.get(0).getAltitude());
 
 		// HashMap<String, java.util.List<Coordinate>> r = uwa.getKMLCoordinates(0,1,0);
@@ -84,11 +85,11 @@ public class underWaterArea {
 		// System.out.println(c.get(0).getLongitude()+" "+c.get(0).getLatitude()+" "+c.get(0).getAltitude());
 		//
 
-//		uwa.createKMLForColorStyle(0, "yellow", 1000);
-//		printGeoEdge(c);
+		uwa.createKMLForColorStyle(0, "yellow", 1000);
+		// printGeoEdge(c);
 	}
 
-	public  double printGeoArea(java.util.List<Coordinate> c) {
+	public double printGeoArea(java.util.List<Coordinate> c) {
 
 		// System.out.println("Size"+c.size());
 		GeographyChecker.Vertex[] v = new GeographyChecker.Vertex[c.size()];
@@ -100,8 +101,8 @@ public class underWaterArea {
 		System.out.println("computeArea:" + ntust.computeArea());
 		return ntust.computeArea();
 	}
-	
-	public  double printGeoEdge(java.util.List<Coordinate> c) {
+
+	public double printGeoEdge(java.util.List<Coordinate> c) {
 
 		// System.out.println("Size"+c.size());
 		GeographyChecker.Vertex[] v = new GeographyChecker.Vertex[c.size()];
@@ -109,25 +110,25 @@ public class underWaterArea {
 		for (int i = 0; i < c.size(); i++) {
 			// System.out.println(c.get(i).getLongitude() + " " + c.get(i).getLatitude());
 			v[i] = new GeographyChecker.Vertex(c.get(i).getLongitude(), c.get(i).getLatitude());
-			
+
 		}
-		
-		for(int i = 0 ; i < v.length;i++){
-			if(i==v.length-1){
+
+		for (int i = 0; i < v.length; i++) {
+			if (i == v.length - 1) {
 				sum = sum + GeographyChecker.Vertex.computeDistance(v[i], v[0]);
-			}else{
-				sum = sum + GeographyChecker.Vertex.computeDistance(v[i], v[i+1]);
+			} else {
+				sum = sum + GeographyChecker.Vertex.computeDistance(v[i], v[i + 1]);
 			}
-			
+
 		}
-//		GeographyChecker ntust = new GeographyChecker(v);
-		
-//		System.out.println("computeArea:" + ntust.computeArea());
+		// GeographyChecker ntust = new GeographyChecker(v);
+
+		// System.out.println("computeArea:" + ntust.computeArea());
 		System.out.println("computeDistince:" + sum);
 		return sum;
 	}
 
-	public void createKMLForColorStyle(int placeMarkNum, String colorType, double overArea) {
+	public HashMap createKMLForColorStyle(int placeMarkNum, String colorType, double overArea) {
 		// Kml worldBorders = Kml.unmarshal(new File(CommonTools.appLocation() + "/resources/exampledata/GWREGION.kml"));
 		de.micromata.opengis.kml.v_2_2_0.Document doc = (de.micromata.opengis.kml.v_2_2_0.Document) kml.getFeature().withName("TaiwanUnderWater");
 
@@ -153,33 +154,37 @@ public class underWaterArea {
 		Folder rootFolder = (Folder) doc.getFeature().get(0).withName("Taiwan");
 		java.util.List<Feature> pmList = rootFolder.getFeature();
 
-//		HashMap<Integer, Double> pmArea = new HashMap<Integer, Double>();
-
+		// HashMap<Integer, Double> pmArea = new HashMap<Integer, Double>();
+		HashMap areaOverNum = new HashMap();
 		for (int i = 0; i < pmList.size(); i++) {
 			// cTmp = getKMLCoordinates(0, i, 0);
 			HashMap<String, java.util.List<Coordinate>> cTmp = getKMLCoordinates(0, i, 0);
 			double geoArea = printGeoArea(cTmp.get("0" + "/" + String.valueOf(i) + "/" + "0" + "/" + "out"));
-//			pmArea.put(i, geoArea);
+			// pmArea.put(i, geoArea);
 			// cTmp.get("0" + "/" + String.valueOf(i) + "/" + "0/" + "out");
+			if(geoArea >= overArea){
+				areaOverNum.put(i,i);
+			}
 			Placemark pm = (Placemark) pmList.get(i);
-			if (colorType.equals("red")&&geoArea>=overArea) {
+			if (colorType.equals("red") && geoArea >= overArea) {
 				pm.withStyleUrl("#redPolygon");
-			} else if (colorType.equals("yellow")&&geoArea>=overArea) {
+			} else if (colorType.equals("yellow") && geoArea >= overArea) {
 				pm.withStyleUrl("#yellowPolygon");
-			} else if (colorType.equals("green")&&geoArea>=overArea) {
+			} else if (colorType.equals("green") && geoArea >= overArea) {
 				pm.withStyleUrl("#greenPolygon");
 			} else {
 				pm.withStyleUrl("#defaultPolygon");
 			}
 		}
-
+		
 		try {
-//			StringWriter sw = new StringWriter();
-			kml.marshal(new File(CommonTools.appLocation()+"/resources/exampledata/writebyuser.kml"));
+			// StringWriter sw = new StringWriter();
+			kml.marshal(new File(CommonTools.appLocation() + "/resources/exampledata/underwater.kml"));
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return areaOverNum;
 
 	}
 
@@ -374,5 +379,12 @@ public class underWaterArea {
 		}
 		return result;
 	}
+	public int placeMarkTotalNum(int folderNum) {
+		de.micromata.opengis.kml.v_2_2_0.Document document = (de.micromata.opengis.kml.v_2_2_0.Document) kml.getFeature();
+		Folder folder = (Folder) document.getFeature().get(folderNum);
+		java.util.List<Feature> pmlist = folder.getFeature();
 
+		return pmlist.size();
+
+	}
 }

@@ -10,6 +10,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import safetaiwan.micromata.jak.Common.CommonTools;
+import safetaiwan.micromata.jak.Receive.KMLReceiveFromNet;
 
 public class underWaterAreaFX extends Application {
 	private Stage stage;
@@ -33,6 +35,9 @@ public class underWaterAreaFX extends Application {
 	}
 	private void gotoLogin() {
 		try {
+			 String path = CommonTools.appLocation() + "/resources/exampledata/underwater.kml";
+			 String URL = "http://gic.wra.gov.tw/gic/API/Google/DownLoad.aspx?fname=GWREGION";
+			KMLReceiveFromNet.KMLReceive(URL, path);
 			underWaterAreaController uWAC = (underWaterAreaController) replaceSceneContent("underWaterArea.fxml");
 			uWAC.setApp(this);
 		} catch (Exception ex) {

@@ -12,7 +12,8 @@ import org.apache.commons.net.ftp.FTPSClient;
 public class FTPClientUpload {
 	String webAddress = "";
 	public static void main(String[] args) {
-		uploadFileToFTP("60.250.226.78", "sowlu", "710522", "D:\\Desktop\\usbphp\\root\\index.html", "index.html");
+//		uploadFileToFTP("60.250.226.78", "sowlu", "710522", "D:\\Desktop\\usbphp\\root\\index.html", "index.html");
+		uploadFileToFTP("60.250.226.78", "sowlu", "710522", "D:\\Desktop\\usbphp\\root\\underwater.kml", "underwater.kml");
 	}
 	public static boolean uploadFileToFTP(String webAddress, String user, String passwd, String filePath, String filename) {
 		FTPClient client = new FTPClient();

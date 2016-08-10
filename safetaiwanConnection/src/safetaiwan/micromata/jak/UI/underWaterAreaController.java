@@ -1,7 +1,9 @@
 package safetaiwan.micromata.jak.UI;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,6 +29,8 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.util.Callback;
 import safetaiwan.micromata.jak.Common.CommonTools;
+import safetaiwan.micromata.jak.Common.FTPClientUpload;
+import safetaiwan.micromata.jak.Receive.KMLReceiveFromNet;
 import safetaiwan.micromata.jak.parser.underWaterArea;
 
 /**
@@ -56,25 +60,29 @@ public class underWaterAreaController extends AnchorPane {
 	public String colorSelect = "red";
 
 	private underWaterAreaFX application;
-	private String path = CommonTools.appLocation() + "/resources/exampledata/GWREGION.kml";
+	private String path = CommonTools.appLocation() + "/resources/exampledata/underwater.kml";
 	private underWaterArea uWA = new underWaterArea(path);
+	
 	public void setApp(underWaterAreaFX application) {
 		this.application = application;
 	}
 
 	@FXML // This method is called by the FXMLLoader when initialization is complete
 	void initialize() {
+		
+		FTPClientUpload.uploadFileToFTP("60.250.226.78", "sowlu", "710522", CommonTools.appLocation()+"\\resources\\exampledata\\index_red.html", "index.html");;
+//		try {
+//			Thread.sleep(100);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		webViewInitial();
 		comboBoxRegionSelect();
 		comboBoxOverAreaColorSelect();
 		InputOverAreaTextField.setText("0.0");
 	}
-	private void createUnderWaterKML() {
-		double overArea = Double.valueOf(InputOverAreaTextField.getText());
-		// String colorType = OverAreaComboBoxColor.get
 
-		// uWA.createKMLForColorStyle(0, colorType, overArea);
-	}
 
 	private String[] getRegionName() {
 
@@ -87,7 +95,18 @@ public class underWaterAreaController extends AnchorPane {
 	}
 
 	public void processButton(ActionEvent event) {
-		System.out.println("hello world");
+//		System.out.println("hello world");
+		HashMap areaOver = uWA.createKMLForColorStyle(0, colorSelect, Double.valueOf(InputOverAreaTextField.getText()));
+		new RWJavascriptFile(areaOver,colorSelect);
+		FTPClientUpload.uploadFileToFTP("60.250.226.78", "sowlu", "710522", CommonTools.appLocation()+"\\resources\\exampledata\\index.html", "index.html");;
+		webViewInitial();
+		String[] excelCommand = new String[] { "C:\\Program Files (x86)\\Google\\Google Earth\\client\\googleearth.exe", "/s", path };
+		try {
+			Runtime.getRuntime().exec(excelCommand);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void comboBoxRegionSelect() {
@@ -185,6 +204,7 @@ public class underWaterAreaController extends AnchorPane {
 	private void webViewInitial() {
 		WebEngine webEngine = webContentView.getEngine();
 		webEngine.load("http://60.250.226.78/index.html");
+//		webEngine.load("http://127.0.0.1:8080");
 		// getChildren().add(webContentView);
 	}
 }
