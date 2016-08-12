@@ -126,10 +126,10 @@ public class underWaterAreaController extends AnchorPane {
 				double x = uWA.printGeoArea(c);
 				DecimalFormat df = new DecimalFormat("#.###");
 				String s = df.format(x);
-				cAreaLabel.setText(s + "(km^2)");
+				cAreaLabel.setText(s + "(平方公里)");
 				x = uWA.printGeoEdge(c);
 				s = df.format(x);
-				cEdgeLabel.setText(s + "(km)");
+				cEdgeLabel.setText(s + "(公里)"+" 節點:"+c.size()+"個");
 			}
 		});
 		regionNameComboBox.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {

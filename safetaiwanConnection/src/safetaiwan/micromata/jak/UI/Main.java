@@ -32,10 +32,10 @@ public class Main extends Application {
 	for(int i = 0 ; i < c.size() ; i ++){
 		
 		System.out.println(c.get(i).getLatitude());
-//		d[2*i+1]=(c.get(i).getLatitude()-20.0)*100;
-//		d[2*i]=(c.get(i).getLongitude()-121.0)*100;
-		d[2*i+1]=lngToPixel(c.get(i).getLatitude(),0);
-		d[2*i]=latToPixel(c.get(i).getLongitude(),0);
+		d[2*i+1]=(c.get(i).getLatitude()-20.0)*100;
+		d[2*i]=(c.get(i).getLongitude()-121.0)*100;
+//		d[2*i+1]=lngToPixel(c.get(i).getLatitude(),0);
+//		d[2*i]=latToPixel(c.get(i).getLongitude(),0);
 		
 		System.out.println(d[2*i]+" "+d[2*i+1]);
 	}

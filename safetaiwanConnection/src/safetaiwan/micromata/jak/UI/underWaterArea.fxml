@@ -63,7 +63,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Label fx:id="cAreaLabel" text="(km^2)" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Label fx:id="cAreaLabel" text="(平方公里)" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font></Label>
@@ -81,7 +81,7 @@
                   </LinearGradient>
                </textFill>
             </Label>
-            <Label fx:id="cEdgeLabel" text="(km)" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Label fx:id="cEdgeLabel" text="(公里)" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font size="18.0" />
                </font></Label>
@@ -93,7 +93,7 @@
                   <Insets bottom="5.0" top="5.0" />
                </GridPane.margin>
             </Button>
-            <Label fx:id="overAreaLabel" text="分區超過面積(km^2)  :" textFill="BLUE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Label fx:id="overAreaLabel" text="分區超過面積(平方公里)  :" textFill="BLUE" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font name="System Bold Italic" size="18.0" />
                </font>
