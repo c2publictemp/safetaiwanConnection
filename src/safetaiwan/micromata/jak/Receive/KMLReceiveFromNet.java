@@ -36,18 +36,18 @@ public class KMLReceiveFromNet {
 	}
 	public static void KMLReceive(String url,String outFilePath) {
 		
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+//		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		if(url.equals("") || url==null){
 			url = "http://gic.wra.gov.tw/gic/API/Google/DownLoad.aspx?fname=GWREGION";
 		}
 		
-		DocumentBuilder db;
-		Document doc;
+//		DocumentBuilder db;
+//		Document doc;
 		String a = null;
 		try {
-			db = dbf.newDocumentBuilder();
-			doc = db.parse(url);
-			doc.normalize();
+//			db = dbf.newDocumentBuilder();
+//			doc = db.parse(url);
+//			doc.normalize();
 			a = XMLParserTools.formatXML(url);
 			System.out.println(a);
 			List<String> lines = Arrays.asList(a);
@@ -57,7 +57,7 @@ public class KMLReceiveFromNet {
 			}
 			Path file = Paths.get(outFilePath);
 			Files.write(file, lines, Charset.forName("UTF-8"));
-		} catch (ParserConfigurationException | SAXException | IOException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
