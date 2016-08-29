@@ -32,26 +32,26 @@ public class KMLReceiveFromNet {
 		String s = CommonTools.appLocation();
 		String URL = "http://gic.wra.gov.tw/gic/API/Google/DownLoad.aspx?fname=GWREGION";
 		String outFilePath = s + "/resources/exampledata/underwater.kml";
-		KMLReceive(URL,outFilePath);
+		KMLReceive(URL, outFilePath);
 	}
-	public static void KMLReceive(String url,String outFilePath) {
-		
-//		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		if(url.equals("") || url==null){
+	public static void KMLReceive(String url, String outFilePath) {
+
+		// DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		if (url.equals("") || url == null) {
 			url = "http://gic.wra.gov.tw/gic/API/Google/DownLoad.aspx?fname=GWREGION";
 		}
-		
-//		DocumentBuilder db;
-//		Document doc;
+
+		// DocumentBuilder db;
+		// Document doc;
 		String a = null;
 		try {
-//			db = dbf.newDocumentBuilder();
-//			doc = db.parse(url);
-//			doc.normalize();
+			// db = dbf.newDocumentBuilder();
+			// doc = db.parse(url);
+			// doc.normalize();
 			a = XMLParserTools.formatXML(url);
-			System.out.println(a);
+			// System.out.println(a);
 			List<String> lines = Arrays.asList(a);
-			if(outFilePath.equals("") || outFilePath==null){
+			if (outFilePath.equals("") || outFilePath == null) {
 				String s = CommonTools.appLocation();
 				outFilePath = s + "/resources/exampledata/underwater.kml";
 			}
@@ -64,7 +64,7 @@ public class KMLReceiveFromNet {
 		// String url = "http://opendata.cwb.gov.tw/opendataapi?dataid=F-C0032-001&authorizationkey=CWB-A56720DC-7A3B-4DF6-970A-326C62193C78";
 
 		// KML kml =
-//		System.out.println(a);
+		// System.out.println(a);
 	}
-	
+
 }

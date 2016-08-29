@@ -62,7 +62,7 @@ public class underWaterAreaController extends AnchorPane {
 	private underWaterAreaFX application;
 	private String path = CommonTools.appLocation() + "/resources/exampledata/underwater.kml";
 	private underWaterArea uWA = new underWaterArea(path);
-	private String serverIP="192.168.1.1";
+	private String serverIP="60.250.226.78";
 	public void setApp(underWaterAreaFX application) {
 		this.application = application;
 	}
